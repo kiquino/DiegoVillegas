@@ -1,0 +1,16 @@
+<section>
+    <h2 class="subtitle">Espacio Personal</h2>
+
+    {{#if logged}}<p>Aquí podrá ver y editar todos sus datos personales.</p>
+
+    <hr>
+    <p>Acá Irian Los datos de uno mismo y sus gastos personales</p>
+    <p>lleva y trae datos de la bbdd</p>
+    {{/if}}
+    {{#unless logged}}
+    <br>
+    <b>Ingrese para poder ver su información personal</b>
+    <hr>
+    <a class="btn btn-primary" href="/admin/login">Ingresar</a>
+    {{/unless}}
+</section>

@@ -1,0 +1,21 @@
+<section>
+    <h2 class="subtitle">Espacio de Gastos</h2>
+    <p>Acá Irian los Gastos Generales de la casa</p>
+    <p>Conectaria con base de datos del domicilio</p>
+    <p>y otra base de datos de individuos</p>
+    {{#unless logged}}
+    <br>
+    <b>Ingrese para poder visualizar los gastos del domicilio</b>
+    {{/unless}}
+    {{#if logged}}
+    <br>
+    <b>Vea los gastos del mes:</b>
+    <hr>
+    <ul class="vertical flex ">
+        <li><a href="/gastos">Compras Generales</a></li>
+        <li><a href="/gastos">Pedidos</a></li>
+        <li><a href="/gastos">Más...</a></li>
+
+    </ul>
+    {{/if}}
+</section>

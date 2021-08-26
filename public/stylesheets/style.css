@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap');
+
+
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Open Sans', sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+ul {
+
+  display: flex;
+  width: 100%;
+
+}
+
+ul li {
+  list-style: none;
+  margin: 0 2rem;
+}
+
+.flex {
+  display: flex;
+}
+
+.login-button {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.centrado {
+  margin: 0 auto;
+  justify-content: center;
+
+}
+
+.flex-end {
+  justify-content: flex-end;
+}
+
+.v-right {
+  margin-left: auto;
+  justify-content: right;
+}
+
+.v-left {
+  margin-right: auto;
+  justify-content: left;
+}
+
+.h-right {
+  margin-left: auto;
+  justify-content: flex-end;
+}
+
+.h-left {
+  margin-right: auto;
+  justify-content: flex-start;
+}
+
+.vertical {
+  flex-direction: column;
+
+}
+
+.horizontal {
+  flex-direction: row;
+
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.width-contenido {
+  width: max-content;
+}
+
+.texto-centrado {
+  text-align: center;
+}
+
+header {
+  width: 100%;
+  height: 6rem;
+  background-color: aliceblue;
+  display: flex;
+  align-items: center;
+
+}
+
+main {
+  width: 80%;
+
+}
+
+section {
+  width: 60%;
+  float: left;
+  background-color: rgba(175, 210, 255, 0.5);
+  display: flex;
+  flex-direction: column;
+
+  justify-content: left;
+  padding: 5% 1%;
+}
+
+
+.subtitle {
+  margin: 2rem 0;
+}
+
+.margin-t-5 {
+  margin-top: 5rem;
+}
+
+.margin-tb-5 {
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+}

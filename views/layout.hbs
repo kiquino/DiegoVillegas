@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>{{title}}</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+
+<body>
+  <header>
+    <ul class="centrado">
+      <li><a href="/">Home</a></li>
+      <li><a href="/servicios">Servicios</a></li>
+      <li><a href="/gastos">Gastos</a></li>
+      <li><a href="/personal">personal</a></li>
+
+    </ul>
+  </header>
+  <div class="login-bar horizontal w-100">
+    <ul class="right flex flex-end align-items-center">
+
+      <p class="my-0">Hola, {{#if logged}} <b> {{nombre}}</b> {{else}} <b>Desconocido</b>{{/if}}</p>
+      {{#if logged}}
+      <li class="mx-1">
+        <a class="btn btn-primary " href="admin/builder">Perfil <i class="fas fa-user-alt"></i></a>
+      </li>
+      <li class="mx-1">
+        <a class="btn btn-danger" href="admin/login/logout">salir <i class="fas fa-sign-out-alt"></i></a>
+      </li>
+
+      {{else}}
+      <li>
+
+        <a href="admin/login"><button type="button" class="btn btn-primary"><i
+              class="fas fa-sign-in-alt  me-2"></i>Ingreso</button></a>
+        <a href="/admin/registro"><button type="button" class="btn btn-primary"><i
+              class="fas fa-user-plus me-2"></i>Registro</button></a>
+
+
+
+      </li>
+      {{/if}}
+
+
+
+    </ul>
+  </div>
+  <main class="columna centrado margin-tb-5"> {{{body}}}</main>
+
+</body>
+
+</html>

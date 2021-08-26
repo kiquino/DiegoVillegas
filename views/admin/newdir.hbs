@@ -1,0 +1,51 @@
+<div class="container">
+    <div class="row">
+        <div class="col-8 offset-2 align-self-center">
+            <p class="display-4 text-center mb-5">Ingrese Nuevo Hogar</p>
+            <form action="/admin/newdir" method="POST">
+                <div class="d-flex flex-row mb-3">
+                    <div class="">
+                        <label for="calle" class="form-label">Nombre de Calle</label>
+                        <input type="text" name="calle" class="form-control" id="calle"
+                            aria-describedby="nombre de cale">
+                        <div id="emailHelp" class="form-text">Ej: Av Maipu</div>
+                    </div>
+                    <div class="ms-4">
+                        <label for="altura" class="form-label">Altura</label>
+                        <input type="text" name="altura" class="form-control" id="altura"
+                            aria-describedby="nombre de cale">
+                        <div id="emailHelp" class="form-text">Ej: 598</div>
+                    </div>
+                </div>
+                <div class="d-flex mb-3">
+                    <div class="">
+                        <label for="alquiler" class="form-label">¿Cuánto paga de alquiler?</label>
+                        <input type="text" name="alquiler" class="form-control" id="alquiler"
+                            aria-describedby="nombre de cale">
+                        <div id="emailHelp" class="form-text">Ej: 25000(sin puntos ni comas)</div>
+                    </div>
+                    <div class="ms-4">
+                        <label for="cantidad_personas" class="form-label">¿Cuántos miembros pagan alquiler?</label>
+                        <input type="text" name="cantidad_personas" class="form-control" id="cantidad_personas"
+                            aria-describedby="cantidad_personas">
+                        <div id="emailHelp" class="form-text">Ej: 1-10</div>
+                    </div>
+                </div>
+                {{!-- <div class="d-flex justify-content-start">
+                    <div class="mt-5">
+                        <label for="admin" class="form-label">Soy el Administrador de la casa</label>
+                        <input type="checkbox" name="admin" id="admin" aria-describedby="nombre de cale" value="true"
+                            checked>
+
+                    </div>
+                </div> --}}
+                <button type="submit" class="btn btn-success">+ Registrar Domicilio</button>
+            </form>
+            {{#if error}}
+            <p>Hay un dato Erroneo o el domicilio ya existe</p>
+            {{/if}}
+        </div>
+
+    </div>
+
+</div>

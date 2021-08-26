@@ -1,0 +1,59 @@
+<div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-6 offset-3">
+                <p class="display-4 text-center">Bienvenido {{nombre}}</p>
+                <hr>
+                {{#if admin}}
+                <div class="my-4 alert alert-success"> <b>Actualmente es Administrador de la casa</b></div>
+
+                {{/if}}
+
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-10 offset-1">
+                <ul class="d-flex flex-row justify-content-center">
+                    {{#if admin}}<li><a class="btn btn-primary" href="/alquiler">REALIZAR PAGO DE ALQUILER</a></li>
+                    {{/if}}
+                    <li><a class="btn btn-primary" href="./compra">AGREGAR COMPRA</a></li>
+                    <li><a class="btn btn-primary" href="./servicio">VER o PAGAR SERVICIO</a></li>
+                    <li><a class="btn btn-primary" href="./perfil">MODIFICAR PERFIL</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-8 offset-2">
+                <h4>Datos Personales</h4>
+                <ul class="list-group">
+                    <li class="list-group-item">Nombre: {{nombre}}</li>
+                    <li class="list-group-item">Apellido: {{apellido}}</li>
+                    <li class="list-group-item">email: {{email}}</li>
+                    <li class="list-group-item">Document:{{documento}}</li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-8 offset-2">
+                <h4>Datos De Domicilio</h4>
+                <ul class="list-group">
+                    <li class="list-group-item">Calle: {{calle}}</li>
+                    <li class="list-group-item">Altura: {{altura}}</li>
+                    <li class="list-group-item">alquiler: ${{alquiler}}</li>
+                    <li class="list-group-item">integrantes: <ul class="list-group">{{#each integrantes}}
+                            <li class="list-group-item">{{this}}</li>
+                            {{/each}}
+                        </ul>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    {{!-- <div class="d-flex justify-content-center mt-5"> <a class="btn btn-danger" href="login/logout">Salir</a></div>
+    --}}
+
+</div>

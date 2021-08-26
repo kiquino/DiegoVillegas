@@ -1,0 +1,62 @@
+<div class="my-5 w-100 text-center">
+    <p class="display-5">Nuevo Ingreso</p>
+</div>
+<form method="POST" action="/admin/registro">
+    <div class="d-flex flex-row mb-3">
+        <div class="">
+            <label for="calle" class="form-label">Nombre de Calle</label>
+            <input type="text" name="calle" class="form-control" id="calle" aria-describedby="nombre de cale">
+            <div id="emailHelp" class="form-text">Ej: Av Maipu</div>
+        </div>
+        <div class="ms-4">
+            <label for="altura" class="form-label">Altura</label>
+            <input type="text" name="altura" class="form-control" id="altura" aria-describedby="nombre de cale">
+            <div id="emailHelp" class="form-text">Ej: 598</div>
+        </div>
+        <div class="ms-auto">
+            <a href="/admin/newdir" class="centrado"><button type="button" class="btn btn-success">+ Nuevo
+                    Domicilio</button></a>
+        </div>
+    </div>
+    <hr>
+
+    <div class="mb-3">
+        <label for="nombre" class="form-label">Nombre</label>
+        <input type="text" name="nombre" class="form-control" id="nombre" aria-describedby="emailHelp">
+        <div id="emailHelp" class="form-text">Ej: Juan</div>
+    </div>
+    <div class="mb-3">
+        <label for="apellido" class="form-label">Apellido</label>
+        <input type="text" name="apellido" class="form-control" id="apellido" aria-describedby="emailHelp">
+        <div id="emailHelp" class="form-text">Ej: Perez</div>
+    </div>
+    <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="text" name="email" class="form-control" id="email" aria-describedby="emailHelp">
+        <div id="emailHelp" class="form-text">Ej: juanperez@email.com</div>
+    </div>
+    <div class="mb-3">
+        <label for="dni" class="form-label">Número de Documento</label>
+        <input type="text" name="dni" class="form-control" id="dni" aria-describedby="emailHelp">
+        <div id="emailHelp" class="form-text">Ej: 30123456</div>
+    </div>
+    <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" name="password" class="form-control" id="password">
+    </div>
+    <hr>
+    <div class="form-check mb-5">
+        <input class="form-check-input" type="checkbox" value="1" id="admin" name="admin" checked>
+        <label class="form-check-label" for="flexCheckChecked">
+            SOY ADMINISTRADOR
+        </label>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Registrarse</button>
+</form>
+<div style="width: 100%; display:flex; justify-content:center; align-items:center;"><a href="/admin/login"
+        class="centrado"><button type="button" class="btn btn-info">Ingresar</button></a></div>
+
+{{#if error}}
+<p>Error de datos de ingreso.</p>
+{{/if}}
