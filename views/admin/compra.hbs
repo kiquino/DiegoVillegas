@@ -1,0 +1,42 @@
+<div>
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <h2>INGRESO DE COMPRA</h2>
+                <form action="/admin/compra" method="post">
+                    <div class="mb-3">
+                        <label for="valor" class="form-label">valor</label>
+                        <input type="number" name="valor" class="form-control" id="valor" aria-describedby="valor">
+                        <div id="valor" class="form-text">Ej: $90</div>
+                    </div>
+                    <div class="d-flex flex-row flex-wrap">
+                        <div class="mb-3">
+                            <label for="todos" class="form-label">Todos</label>
+                            <input type="radio" name="todos" class="form-check-input" id="todos"
+                                aria-describedby="valor" {{#if grupal}}checked{{/if}}>
+
+                        </div>
+                        <div class="mb-3">
+                            <label for="todos" class="form-label">Elegir</label>
+                            <input type="radio" name="todos" class="form-check-input" id="todos"
+                                aria-describedby="valor">
+
+                        </div>
+                        <div class="mb-3">
+                            <ul class="list-group">{{#each integrantes}}
+                                <li class="list-group-item">
+                                    <input type="checkbox" name="todos" class="form-check-input" id="todos"
+                                        aria-describedby="valor"><label for="todos" class="form-label">{{this}}</label>
+                                </li>
+                                {{/each}}
+                            </ul>
+
+                        </div>
+
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

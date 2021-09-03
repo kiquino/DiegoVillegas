@@ -3,7 +3,12 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
+var cors = require('cors');
+var rutasProtegidas = express.Router();
+var app = express();
+var bodyParser = require('body-parser');
+var jwt = require('jsonwebtoken');
+var config = require('./configs/config')
 require('dotenv').config();
 
 var indexRouter = require('./routes/index');
@@ -17,6 +22,7 @@ var registerRouter = require('./routes/admin/registro');
 var registrohogarRouter = require('./routes/admin/newdir');
 var perfilRouter = require('./routes/admin/perfil');
 var compraRouter = require('./routes/admin/compra');
+var apiRouter = require('./routes/api');
 
 const session = require('express-session');
 
@@ -42,6 +48,8 @@ app.use(session({
   saveUninitialized: true
 }));
 
+
+
 secured = async (req, res, next) => {
   try {
     console.log(req.session.documento);
@@ -58,6 +66,16 @@ secured = async (req, res, next) => {
   }
 }
 
+app.set('llave', config.llave);
+
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+
+app.use(bodyParser.json());
+
+
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/admin/login', loginRouter);
@@ -69,6 +87,8 @@ app.use('/admin/builder', secured, BuilderRouter);
 app.use('/admin/newdir', registrohogarRouter);
 app.use('/admin/perfil', secured, perfilRouter);
 app.use('/admin/compra', secured, compraRouter);
+app.use('/api', cors(), apiRouter);
+
 
 
 

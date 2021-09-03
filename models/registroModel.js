@@ -43,6 +43,10 @@ async function newInquilino(nombre, apellido, email, dni, password, calle, altur
         console.log(err);
     }
 }
+async function newCompra(id, categoria, inquilinos, valor) {
+
+}
 module.exports = {
-    newInquilino
+    newInquilino,
+    newCompra
 };

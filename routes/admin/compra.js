@@ -1,10 +1,17 @@
 var express = require('express');
 var app = express();
 
+const rutaProtegida = express.Router();
+
+
+
 
 app.get('/', function (req, res, next) {
     var logged = Boolean(req.session.nombre);
     var admin = false;
+    var grupal = true;
+
+
     if (req.session.admin == 1) {
         admin = true;
     }
@@ -22,7 +29,9 @@ app.get('/', function (req, res, next) {
         alquiler: req.session.alquiler,
         integrantes: req.session.integrantes,
         admin: admin,
-        logged: logged
+        logged: logged,
+        token: req.session.token,
+        grupal: grupal
     });
 });
 

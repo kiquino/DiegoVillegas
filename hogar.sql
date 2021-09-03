@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 16-08-2021 a las 20:43:04
+-- Tiempo de generación: 01-09-2021 a las 13:24:04
 -- Versión del servidor: 5.7.31
 -- Versión de PHP: 7.3.21
 
@@ -24,6 +24,49 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `gastos`
+--
+
+DROP TABLE IF EXISTS `gastos`;
+CREATE TABLE IF NOT EXISTS `gastos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_individuo` int(11) NOT NULL,
+  `gasto` int(11) NOT NULL,
+  `categoria` varchar(100) NOT NULL,
+  `fecha` date NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `hogar`
+--
+
+DROP TABLE IF EXISTS `hogar`;
+CREATE TABLE IF NOT EXISTS `hogar` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `calle` varchar(80) NOT NULL,
+  `altura` int(11) NOT NULL,
+  `alquiler` int(11) NOT NULL,
+  `cantidad_integrantes` int(11) NOT NULL,
+  `estado_de_pago` varchar(20) DEFAULT NULL,
+  `id_admin` int(11) DEFAULT NULL,
+  `id_admin2` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `hogar`
+--
+
+INSERT INTO `hogar` (`id`, `calle`, `altura`, `alquiler`, `cantidad_integrantes`, `estado_de_pago`, `id_admin`, `id_admin2`) VALUES
+(17, 'BARTOLOME MITRE', 1371, 25000, 4, NULL, 0, NULL),
+(16, 'CERRITO', 1185, 25000, 4, NULL, 23, NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `inquilino`
 --
 
@@ -34,21 +77,52 @@ CREATE TABLE IF NOT EXISTS `inquilino` (
   `nombre` varchar(80) NOT NULL,
   `apellido` varchar(80) NOT NULL,
   `email` varchar(80) NOT NULL,
+  `id_domicilio` int(11) DEFAULT NULL,
+  `admin` int(11) NOT NULL DEFAULT '0',
   `password` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `inquilino`
 --
 
-INSERT INTO `inquilino` (`id`, `documento`, `nombre`, `apellido`, `email`, `password`) VALUES
-(1, 36212382, 'Jose', 'Santos', 'santos@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055'),
-(3, 11223344, 'Pipa', 'Tata', 'pita@tata.com', 'd93591bdf7860e1e4ee2fca799911215'),
-(4, 1, 'Bruno', 'Diaz', 'bd@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055'),
-(5, 1234, 'Diego', 'Villegas', 'Villegas', '81dc9bdb52d04dc20036dbd8313ed055'),
-(8, 123455, 'ej', 'ej', 'ej', '81dc9bdb52d04dc20036dbd8313ed055'),
-(7, 123455, 'ej', 'ej', 'ej', '81dc9bdb52d04dc20036dbd8313ed055');
+INSERT INTO `inquilino` (`id`, `documento`, `nombre`, `apellido`, `email`, `id_domicilio`, `admin`, `password`) VALUES
+(23, 36212682, 'Diego', 'Villegas', 'kiquino@gmail.com', 16, 1, '81dc9bdb52d04dc20036dbd8313ed055'),
+(24, 36212382, 'Juan', 'Santoro', 'juanpe.santoro@gmail.com', 16, 0, '81dc9bdb52d04dc20036dbd8313ed055'),
+(25, 35030293, 'Julian', 'Luchelli', 'Jl@gmail.com', 16, 0, '81dc9bdb52d04dc20036dbd8313ed055');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pagos`
+--
+
+DROP TABLE IF EXISTS `pagos`;
+CREATE TABLE IF NOT EXISTS `pagos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `categoria` varchar(80) NOT NULL,
+  `fecha_pago` date NOT NULL,
+  `monto` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `servicios`
+--
+
+DROP TABLE IF EXISTS `servicios`;
+CREATE TABLE IF NOT EXISTS `servicios` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` int(11) NOT NULL,
+  `id_domicilio` int(11) NOT NULL,
+  `gasto` int(11) NOT NULL,
+  `estado` tinyint(1) NOT NULL,
+  `fecha_pago` date NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

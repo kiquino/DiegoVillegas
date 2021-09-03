@@ -19,6 +19,16 @@ async function getDomicilio(id_domicilio) {
         console.log(err);
     }
 }
+async function getEmailPassword() {
+    try {
+        var query = "select * from inquilino ";
+        var rows = await pool.query(query);
+        return rows;
+    } catch (error) {
+        throw error;
+    }
+
+}
 async function getIntegrantes(id_domicilio) {
     try {
         var query = "select nombre,apellido from inquilino where id_domicilio = ?";
@@ -31,5 +41,6 @@ async function getIntegrantes(id_domicilio) {
 module.exports = {
     getDniAndPass,
     getDomicilio,
-    getIntegrantes
+    getIntegrantes,
+    getEmailPassword
 };

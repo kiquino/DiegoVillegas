@@ -2,6 +2,8 @@ var express = require('express');
 var router = express();
 var usuariosmodel = require('./../../models/usuariosModels');
 
+var jwt = require('jsonwebtoken');
+
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -13,6 +15,7 @@ router.get('/logout', function (req, res, next) {
     req.session.destroy();
     res.redirect('/');
 })
+
 router.post('/', async (req, res, next) => {
 
     try {
@@ -40,7 +43,23 @@ router.post('/', async (req, res, next) => {
             req.session.integrantes = elements;
 
             logged = true;
-            res.redirect('/admin/builder');
+            if (logged) {
+
+                const payload = {
+                    check: true
+                };
+                const token = jwt.sign(payload, router.get('llave'), {
+                    expiresIn: 1440
+                });
+                req.session.token = token;
+
+                res.redirect('/admin/builder');
+            } else {
+                res.json({
+                    mensaje: "Usuario o contraseña incorrectos"
+                })
+            }
+
         } else {
             res.render('admin/login', {
                 layout: 'admin/layout',
