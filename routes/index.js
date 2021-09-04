@@ -8,15 +8,6 @@ const rutaProtegida = express.Router();
 
 router.set('llave', config.llave);
 
-router.use(bodyParser.urlencoded({
-  extended: true
-}));
-
-router.use(bodyParser.json());
-
-router.listen(3001, () => {
-  console.log('Servidor iniciado en el puerto 3001')
-});
 
 
 /* GET home page. */

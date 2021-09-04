@@ -23,6 +23,7 @@ var registrohogarRouter = require('./routes/admin/newdir');
 var perfilRouter = require('./routes/admin/perfil');
 var compraRouter = require('./routes/admin/compra');
 var apiRouter = require('./routes/api');
+var AutenticacionRouter = require('./routes/admin/autenticacion');
 
 const session = require('express-session');
 
@@ -66,7 +67,7 @@ secured = async (req, res, next) => {
   }
 }
 
-app.set('llave', config.llave);
+
 
 app.use(bodyParser.urlencoded({
   extended: true
@@ -88,6 +89,7 @@ app.use('/admin/newdir', registrohogarRouter);
 app.use('/admin/perfil', secured, perfilRouter);
 app.use('/admin/compra', secured, compraRouter);
 app.use('/api', cors(), apiRouter);
+app.use('/admin/autenticacion', cors(), AutenticacionRouter);
 
 
 
