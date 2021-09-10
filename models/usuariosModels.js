@@ -3,7 +3,7 @@ var md5 = require('md5');
 
 async function getDniAndPass(dni, pass) {
     try {
-        var query = "select * from inquilino where documento = ? and password = ? limit 1";
+        var query = "select id,nombre,id_domicilio from inquilino where documento = ? and password = ? limit 1";
         var rows = await pool.query(query, [dni, md5(pass)]);
         return rows[0];
     } catch (err) {
@@ -38,6 +38,15 @@ async function getProfileinfo(id_inquilino) {
         console.log(error);
     }
 }
+async function getGastos(id_inquilino){
+    try {
+        var query = "select gasto,categoria,fecha from gastos where id_individuo = ?";
+        var row = await pool.query(query,[id_inquilino]);
+        return row;
+    } catch (error) {
+        console.log(error);
+    }
+}
 async function getIntegrantes(id_domicilio) {
     try {
         var query = "select nombre,apellido from inquilino where id_domicilio = ?";
@@ -52,5 +61,6 @@ module.exports = {
     getDomicilio,
     getIntegrantes,
     getEmailPassword,
-    getProfileinfo
+    getProfileinfo,
+    getGastos
 };

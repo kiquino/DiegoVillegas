@@ -83,24 +83,24 @@ app.get('/', (req, res, next) => {
         token: req.session.token
     }]
 
-    res.render('admin/builder', {
-        layout: 'admin/layout',
-        title: 'Bienvenido',
-        nombre: req.session.nombre,
-        apellido: req.session.apellido,
-        documento: req.session.documento,
-        email: req.session.email,
-        domicilio: req.session.id_domicilio,
-        calle: req.session.calle,
-        altura: req.session.altura,
-        alquiler: req.session.alquiler,
-        integrantes: req.session.integrantes,
-        admin: admin,
-        logged: logged,
-        token: req.session.token
+    // res.render('admin/builder', {
+    //     layout: 'admin/layout',
+    //     title: 'Bienvenido',
+    //     nombre: req.session.nombre,
+    //     apellido: req.session.apellido,
+    //     documento: req.session.documento,
+    //     email: req.session.email,
+    //     domicilio: req.session.id_domicilio,
+    //     calle: req.session.calle,
+    //     altura: req.session.altura,
+    //     alquiler: req.session.alquiler,
+    //     integrantes: req.session.integrantes,
+    //     admin: admin,
+    //     logged: logged,
+    //     token: req.session.token
 
-    });
-    // res.json(datos);
+    // });
+    res.json(datos);
 });
 
 

@@ -30,15 +30,33 @@ router.post('/', async (req, res, next) => {
         if (data) {
 
 
-            res.redirect('../admin/login');
-        } else {
-            res.render('admin/registro', {
-                layout: 'admin/layout',
-                error: true
+            res.json({
+                error: false,
+                mensaje: "Se ha registrado EXITOSAMENTE"
             })
+        } else {
+            res.json({
+                error: true,
+                mensaje: "Hubo un ERROR en el ingreso"
+            })
+            // res.render('admin/registro', {
+            //     layout: 'admin/layout',
+            //     error: true
+            // })
         }
     } catch (error) {
-        console.log(error)
+        res.json({
+            error: true,
+            mensaje: "Hubo un ERROR en el ingreso"
+        })
+    }
+})
+router.post('/compra',async (req,res)=>{
+    try {
+        let id= req.body.id;
+        let 
+    } catch (error) {
+        
     }
 })
 

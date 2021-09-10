@@ -27,22 +27,21 @@ app.post('/', async (req, res, next) => {
     var password = req.body.password;
 
     var data = await usuariosmodel.getDniAndPass(dni, password);
-    if (data) {
-        var data2 = await usuariosmodel.getDomicilio(data.id_domicilio);
-        var data3 = await usuariosmodel.getIntegrantes(data.id_domicilio);
+    if (data != undefined) {
+
         const payload = {
             check: true
         };
-        const token = jwt.sign(payload, app.get('llave'), {
-            expiresIn: 1440,
+        const token = jwt.sign(payload, 'pablitoclavounclavito', {
+            expiresIn: '24h',
         });
-        req.session.user = data;
+        req.session.nombre = data.nombre;
         res.json({
             auth: true,
             token: token,
             result: data,
-            result2: data2,
-            result3: data3
+            mensajeError: "ingreso exitoso"
+
         })
 
         // const payload = {
@@ -57,7 +56,8 @@ app.post('/', async (req, res, next) => {
         // });
     } else {
         res.json({
-            mensaje: "dni o contraseña no existen"
+            auth: false,
+            mensajeError: "dni o contraseña no existen"
         })
     }
 })

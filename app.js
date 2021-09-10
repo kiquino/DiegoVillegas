@@ -24,6 +24,8 @@ var perfilRouter = require('./routes/admin/perfil');
 var compraRouter = require('./routes/admin/compra');
 var apiRouter = require('./routes/api');
 var AutenticacionRouter = require('./routes/admin/autenticacion');
+var profilebuilder = require('./routes/admin/profilebuilder');
+
 
 const session = require('express-session');
 
@@ -80,16 +82,19 @@ app.use(bodyParser.json());
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/admin/login', loginRouter);
-app.use('/admin/registro', registerRouter);
+app.use('/admin/registro',cors(), registerRouter);
 app.use('/personal', personalRouter);
 app.use('/servicios', serviciosRouter);
 app.use('/gastos', gastosRouter);
-app.use('/admin/builder', secured, BuilderRouter);
+app.use('/admin/builder', cors(), BuilderRouter);
 app.use('/admin/newdir', registrohogarRouter);
 app.use('/admin/perfil', secured, perfilRouter);
 app.use('/admin/compra', secured, compraRouter);
 app.use('/api', cors(), apiRouter);
 app.use('/admin/autenticacion', cors(), AutenticacionRouter);
+app.use('/admin/profilebuilder', cors(), profilebuilder);
+
+
 
 
 

@@ -35,7 +35,7 @@ async function newInquilino(nombre, apellido, email, dni, password, calle, altur
             var query3 = "update hogar set id_admin = ? where id = ?";
             var add_admin = await pool.query(query3, [new_id_admin, id_domicilio.id]);
             add_admin;
-            console.log("se agrego");
+
         }
 
         return true;
@@ -43,8 +43,22 @@ async function newInquilino(nombre, apellido, email, dni, password, calle, altur
         console.log(err);
     }
 }
-async function newCompra(id, categoria, inquilinos, valor) {
-
+async function newCompra(id, categoria, valor) {
+    let obj = {
+        id_individuo: id,
+        categoria: categoria,
+        gasto: valor,
+        fecha: new Date()
+    }
+    try {
+        var query = "insert into gastos set ?";
+        var insertCompra = await query(query, [obj]);
+        insertCompra;
+    } catch (error) {
+        res.json({
+            mensaje: "Ha ocurrido un error de ingreso"
+        })
+    }
 }
 module.exports = {
     newInquilino,
