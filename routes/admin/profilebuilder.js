@@ -43,16 +43,18 @@ app.get('/', protectedUser, async (req, res) => {
     if (data) {
         var data2 = await usuariosmodel.getIntegrantes(data.id_domicilio);
         var data3 = await usuariosmodel.getDomicilio(data.id_domicilio);
-        var data4 = await usuariosmodel.getGastos(data.id_domicilio);
-        if(data4 == undefined){
-            data4 = false;
-        }
+        var data4 = await usuariosmodel.getGastos(id);
+        var thereData4 = true;
+       if (data4 == undefined) {
+           thereData4 = false;
+       }
         res.json({
             auth: true,
             result: data,
             result_integrante: data2,
             result_domicilio: data3,
-            result_gastos:data4
+            result_gastos:data4,
+            haygastos:thereData4
         })
     }
 

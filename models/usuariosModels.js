@@ -40,7 +40,7 @@ async function getProfileinfo(id_inquilino) {
 }
 async function getGastos(id_inquilino){
     try {
-        var query = "select gasto,categoria,fecha from gastos where id_individuo = ?";
+        var query = "select * from gastos where id_individuo = ?";
         var row = await pool.query(query,[id_inquilino]);
         return row;
     } catch (error) {
@@ -54,6 +54,14 @@ async function getIntegrantes(id_domicilio) {
         return rows;
     } catch (error) {
         console.log(err)
+    }
+}
+async function UpdateGasto(obj,id){
+    try {
+        var actualizar = "update gastos set ? where id=?";
+        var row = await pool.query(actualizar,[obj,id])
+    } catch (error) {
+        
     }
 }
 module.exports = {
