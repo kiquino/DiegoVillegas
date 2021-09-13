@@ -51,13 +51,6 @@ router.post('/', async (req, res, next) => {
         })
     }
 })
-router.post('/compra',async (req,res)=>{
-    try {
-        let id= req.body.id;
-        let 
-    } catch (error) {
-        
-    }
-})
+
 
 module.exports = router;

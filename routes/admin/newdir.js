@@ -13,22 +13,25 @@ router.post('/', async (req, res, next) => {
         var calle = req.body.calle;
         var altura = req.body.altura;
         var alquiler = req.body.alquiler;
-        var cantidad = req.body.cantidad_personas;
+        
 
 
-        var data = await registroHogar.newHome(calle, altura, alquiler, cantidad);
+        var data = await registroHogar.newHome(calle, altura, alquiler);
 
         if (data == true) {
 
-            res.redirect('../admin/registro')
+           res.json({
+               mensaje:"Se Agregó la dirección"
+           })
         } else {
-            res.render('admin/newdir', {
-                layout: 'admin/layout',
-                error: true
+            res.json({
+                mensaje:"No se Ingresaron datos correctos"
             })
         }
     } catch (error) {
-
+        res.json({
+            mensaje:error
+        })
     }
 
 })

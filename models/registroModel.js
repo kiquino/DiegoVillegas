@@ -44,20 +44,19 @@ async function newInquilino(nombre, apellido, email, dni, password, calle, altur
     }
 }
 async function newCompra(id, categoria, valor) {
-    let obj = {
+    let obj2 = {
         id_individuo: id,
         categoria: categoria,
         gasto: valor,
-        fecha: new Date()
+        fecha:new Date()
     }
     try {
         var query = "insert into gastos set ?";
-        var insertCompra = await query(query, [obj]);
+        var insertCompra = await pool.query(query, [obj2]);
         insertCompra;
+        return true;
     } catch (error) {
-        res.json({
-            mensaje: "Ha ocurrido un error de ingreso"
-        })
+        console.log(error)
     }
 }
 module.exports = {

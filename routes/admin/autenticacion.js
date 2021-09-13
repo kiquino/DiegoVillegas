@@ -22,6 +22,26 @@ app.get('/', (req, res) => {
     }
 })
 
+app.post('/validar',async(req,res,next)=>{
+    const token = req.headers["x-access-token"];
+    if (!token) {
+        res.json({
+            mensaje:"falta token"
+        })
+    }else{
+        jwt.verify(token,'pablitoclavounclavito',(err,decoded)=>{
+            if(err){
+                res.json({
+                    mensaje:"ha ocurrido un error en la verificacion"
+                })
+            }else{
+                req.userId = decoded.id;
+                next();
+            }
+        })
+    }
+})
+
 app.post('/', async (req, res, next) => {
     var dni = req.body.dni;
     var password = req.body.password;

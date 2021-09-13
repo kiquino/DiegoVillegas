@@ -1,12 +1,11 @@
 var pool = require('./bd');
 
 
-async function newHome(calle, altura, alquiler, cantidad) {
+async function newHome(calle, altura, alquiler) {
     let obj = {
         calle: calle.toUpperCase(),
         altura: altura,
-        alquiler: alquiler,
-        cantidad_integrantes: cantidad
+        alquiler: alquiler
 
     }
     try {
