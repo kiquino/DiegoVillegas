@@ -22,6 +22,7 @@ var registerRouter = require('./routes/admin/registro');
 var registrohogarRouter = require('./routes/admin/newdir');
 var perfilRouter = require('./routes/admin/perfil');
 var compraRouter = require('./routes/admin/compra');
+
 var apiRouter = require('./routes/api');
 var AutenticacionRouter = require('./routes/admin/autenticacion');
 var profilebuilder = require('./routes/admin/profilebuilder');
@@ -91,6 +92,7 @@ app.use('/admin/builder', cors(), BuilderRouter);
 app.use('/admin/newdir',cors(), registrohogarRouter);
 app.use('/admin/perfil', secured, perfilRouter);
 app.use('/admin/compra', cors(), compraRouter);
+
 app.use('/api', cors(), apiRouter);
 app.use('/admin/autenticacion', cors(), AutenticacionRouter);
 app.use('/admin/profilebuilder', cors(), profilebuilder);

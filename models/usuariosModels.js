@@ -38,28 +38,69 @@ async function getProfileinfo(id_inquilino) {
         console.log(error);
     }
 }
-async function getGastos(id_inquilino){
+async function getGastos(id_inquilino) {
     try {
         var query = "select * from gastos where id_individuo = ?";
-        var row = await pool.query(query,[id_inquilino]);
+        var row = await pool.query(query, [id_inquilino]);
         return row;
+    } catch (error) {
+        console.log(error);
+    }
+}
+async function getGasto(id) {
+    try {
+        var query = "select gasto,categoria from gastos where id = ?";
+        var row = await pool.query(query, [id]);
+        return row[0];
+    } catch (error) {
+        console.log(error);
+    }
+}
+async function getServicios(id_domicilio) {
+    try {
+        let query = "select * from servicios where id_domicilio =?";
+        let TraerServicios = await pool.query(query, [id_domicilio]);
+        return TraerServicios;
+    } catch (error) {
+        console.log(error);
+    }
+}
+async function getServicioEdit(id) {
+    try {
+        let query = "SELECT * FROM servicios WHERE id=?";
+        let row = await pool.query(query, [id]);
+        
+        return row[0];
+        
     } catch (error) {
         console.log(error);
     }
 }
 async function getIntegrantes(id_domicilio) {
     try {
-        var query = "select nombre,apellido from inquilino where id_domicilio = ?";
+        var query = "select nombre,apellido,id from inquilino where id_domicilio = ?";
         var rows = await pool.query(query, [id_domicilio]);
         return rows;
     } catch (error) {
         console.log(err)
     }
 }
-async function UpdateGasto(obj,id){
+async function UpdateGasto(obj, id) {
     try {
         var actualizar = "update gastos set ? where id=?";
+        var row = await pool.query(actualizar, [obj, id])
+        row;
+        return true;
+    } catch (error) {
+
+    }
+}
+async function updateServicio(obj,id){
+    try {
+        let actualizar = "update servicios set ? where id=?";
         var row = await pool.query(actualizar,[obj,id])
+        row;
+        return true;
     } catch (error) {
         
     }
@@ -70,5 +111,10 @@ module.exports = {
     getIntegrantes,
     getEmailPassword,
     getProfileinfo,
-    getGastos
+    getGastos,
+    getGasto,
+    UpdateGasto,
+    getServicios,
+    getServicioEdit,
+    updateServicio
 };

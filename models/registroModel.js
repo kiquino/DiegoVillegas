@@ -59,7 +59,26 @@ async function newCompra(id, categoria, valor) {
         console.log(error)
     }
 }
+async function NewServicio(id_domicilio,valor,nombre){
+    let obj ={
+        nombre:nombre,
+        id_domicilio:id_domicilio,
+        gasto:valor
+       
+        
+    }
+    try {
+        let query = "insert into servicios set ?";
+        let IngresarServicio = await pool.query(query,[obj])
+        IngresarServicio;
+        return true;
+    } catch (error) {
+        console.log(error)
+        return false;
+    }
+}
 module.exports = {
     newInquilino,
-    newCompra
+    newCompra,
+    NewServicio
 };
