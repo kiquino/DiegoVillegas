@@ -3,11 +3,40 @@ var app = express();
 
 var registroModels = require('../../models/registroModel');
 var usuariosModels = require('../../models/usuariosModels');
+const cookieParser = require('cookie-parser');
+let config = require('../../configs/config');
+app.set('llave', config.llave);
+app.use(cookieParser())
+let jwt = require('jsonwebtoken');
+
+const protectedUser = async (req, res, next) => {
+    const token = await req.headers["x-access-token"];
+
+    if (!token) {
+
+        res.send("falta token");
+
+    } else {
+        jwt.verify(token, 'pablitoclavounclavito', (err, decoded) => {
+            if (err) {
+                res.json({
+                    error: true,
+                    mensaje: "No hay autentificación",
+                    id: req.headers["id"],
+                    token: token,
+                    err
+                })
+            } else {
+                req.userId = decoded.id;
+                next();
+            }
+        })
+    }
+}
 
 
 
-
-app.post('/', async (req, res) => {
+app.post('/',protectedUser, async (req, res) => {
     try {
         let id = req.body.id;
         let categoria = req.body.categoria;
@@ -31,14 +60,15 @@ app.post('/', async (req, res) => {
         })
     }
 });
-app.get('/modificar/:id', async (req, res) => {
+app.get('/modificar/:id',protectedUser, async (req, res) => {
     let id = req.params.id;
 
     let data = await usuariosModels.getGasto(id);
     if (data != undefined) {
         res.json({
             gasto: data.gasto,
-            categoria: data.categoria
+            categoria: data.categoria,
+            fecha:data.fecha
         })
     } else {
         res.json({
@@ -46,7 +76,7 @@ app.get('/modificar/:id', async (req, res) => {
         })
     }
 })
-app.post('/actualizar/:id', async (req, res) => {
+app.post('/actualizar/:id',protectedUser, async (req, res) => {
     let id = req.params.id;
     let gasto = req.body.gasto;
     let categoria = req.body.categoria;

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 01-09-2021 a las 13:24:04
+-- Tiempo de generación: 15-09-2021 a las 00:46:49
 -- Versión del servidor: 5.7.31
 -- Versión de PHP: 7.3.21
 
@@ -35,7 +35,14 @@ CREATE TABLE IF NOT EXISTS `gastos` (
   `categoria` varchar(100) NOT NULL,
   `fecha` date NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `gastos`
+--
+
+INSERT INTO `gastos` (`id`, `id_individuo`, `gasto`, `categoria`, `fecha`) VALUES
+(2, 23, 4242, 'carniceria', '2021-09-13');
 
 -- --------------------------------------------------------
 
@@ -61,7 +68,7 @@ CREATE TABLE IF NOT EXISTS `hogar` (
 --
 
 INSERT INTO `hogar` (`id`, `calle`, `altura`, `alquiler`, `cantidad_integrantes`, `estado_de_pago`, `id_admin`, `id_admin2`) VALUES
-(17, 'BARTOLOME MITRE', 1371, 25000, 4, NULL, 0, NULL),
+(17, 'BARTOLOME MITRE', 1371, 25000, 4, NULL, 28, NULL),
 (16, 'CERRITO', 1185, 25000, 4, NULL, 23, NULL);
 
 -- --------------------------------------------------------
@@ -81,7 +88,7 @@ CREATE TABLE IF NOT EXISTS `inquilino` (
   `admin` int(11) NOT NULL DEFAULT '0',
   `password` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `inquilino`
@@ -90,7 +97,8 @@ CREATE TABLE IF NOT EXISTS `inquilino` (
 INSERT INTO `inquilino` (`id`, `documento`, `nombre`, `apellido`, `email`, `id_domicilio`, `admin`, `password`) VALUES
 (23, 36212682, 'Diego', 'Villegas', 'kiquino@gmail.com', 16, 1, '81dc9bdb52d04dc20036dbd8313ed055'),
 (24, 36212382, 'Juan', 'Santoro', 'juanpe.santoro@gmail.com', 16, 0, '81dc9bdb52d04dc20036dbd8313ed055'),
-(25, 35030293, 'Julian', 'Luchelli', 'Jl@gmail.com', 16, 0, '81dc9bdb52d04dc20036dbd8313ed055');
+(25, 35030293, 'Julian', 'Luchelli', 'Jl@gmail.com', 16, 0, '81dc9bdb52d04dc20036dbd8313ed055'),
+(28, 1234567, 'Isa', 'Bel', 'kiquino@gmail.com', 17, 0, '81dc9bdb52d04dc20036dbd8313ed055');
 
 -- --------------------------------------------------------
 
@@ -116,13 +124,18 @@ CREATE TABLE IF NOT EXISTS `pagos` (
 DROP TABLE IF EXISTS `servicios`;
 CREATE TABLE IF NOT EXISTS `servicios` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` int(11) NOT NULL,
-  `id_domicilio` int(11) NOT NULL,
+  `nombre` varchar(40) NOT NULL,
+  `id_domicilio` varchar(20) NOT NULL,
   `gasto` int(11) NOT NULL,
-  `estado` tinyint(1) NOT NULL,
-  `fecha_pago` date NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `servicios`
+--
+
+INSERT INTO `servicios` (`id`, `nombre`, `id_domicilio`, `gasto`) VALUES
+(2, 'Gas', '16', 1234);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

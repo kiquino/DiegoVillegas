@@ -26,17 +26,44 @@ app.post('/validar',async(req,res,next)=>{
     const token = req.headers["x-access-token"];
     if (!token) {
         res.json({
+           
             mensaje:"falta token"
         })
     }else{
         jwt.verify(token,'pablitoclavounclavito',(err,decoded)=>{
             if(err){
                 res.json({
+                   
                     mensaje:"ha ocurrido un error en la verificacion"
                 })
             }else{
+               
                 req.userId = decoded.id;
                 next();
+            }
+        })
+    }
+})
+app.get('/validar',async(req,res,next)=>{
+    const token = req.headers["x-access-token"];
+    if (!token) {
+        res.json({
+           auth:false,
+            mensaje:"falta token"
+        })
+    }else{
+        jwt.verify(token,'pablitoclavounclavito',(err,decoded)=>{
+            if(err){
+                res.json({
+                   auth:false,
+                    mensaje:"ha ocurrido un error en la verificacion"
+                })
+            }else{
+               res.json({
+                   auth:true
+               })
+                req.userId = decoded.id;
+               
             }
         })
     }

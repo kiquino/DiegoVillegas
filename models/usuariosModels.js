@@ -49,7 +49,7 @@ async function getGastos(id_inquilino) {
 }
 async function getGasto(id) {
     try {
-        var query = "select gasto,categoria from gastos where id = ?";
+        var query = "select gasto,categoria,fecha from gastos where id = ?";
         var row = await pool.query(query, [id]);
         return row[0];
     } catch (error) {
@@ -78,7 +78,7 @@ async function getServicioEdit(id) {
 }
 async function getIntegrantes(id_domicilio) {
     try {
-        var query = "select nombre,apellido,id from inquilino where id_domicilio = ?";
+        var query = "select nombre,apellido,id,email from inquilino where id_domicilio = ?";
         var rows = await pool.query(query, [id_domicilio]);
         return rows;
     } catch (error) {
@@ -92,7 +92,7 @@ async function UpdateGasto(obj, id) {
         row;
         return true;
     } catch (error) {
-
+console.log(error)
     }
 }
 async function updateServicio(obj,id){
@@ -102,7 +102,38 @@ async function updateServicio(obj,id){
         row;
         return true;
     } catch (error) {
-        
+        console.log(error)
+    }
+}
+async function DeleteCompra(id){
+    try {
+        let borrar ="delete from gastos where id=?"
+        let row = await pool.query(borrar,id)
+        row;
+        return true
+    } catch (error) {
+        console.log(error);
+        return false
+    }
+}
+async function DeleteServicio(id){
+    try {
+        let borrar = "delete from servicios where id =?";
+        let row = await pool.query(borrar,id);
+        row;
+        return true
+    } catch (error) {
+        console.log(error)
+        return false
+    }
+}
+async function contactoGet(id){
+    try {
+        let consulta = "select nombre,apellido,email from inquilino where id = ?";
+        let row = await pool.query(consulta,id);
+        return row[0];
+    } catch (error) {
+        console.log(error);
     }
 }
 module.exports = {
@@ -116,5 +147,8 @@ module.exports = {
     UpdateGasto,
     getServicios,
     getServicioEdit,
-    updateServicio
+    updateServicio,
+    DeleteCompra,
+    DeleteServicio,
+    contactoGet
 };
