@@ -40,7 +40,7 @@ async function getProfileinfo(id_inquilino) {
 }
 async function getGastos(id_inquilino) {
     try {
-        var query = "select * from gastos where id_individuo = ?";
+        var query = "select * from compra where id_inquilino = ?";
         var row = await pool.query(query, [id_inquilino]);
         return row;
     } catch (error) {
@@ -49,9 +49,9 @@ async function getGastos(id_inquilino) {
 }
 async function getGasto(id) {
     try {
-        var query = "select gasto,categoria,fecha from gastos where id = ?";
+        var query = "select gastos.nombre,gastos.valor,compra.fecha from gastos join compra on id_compra = id where id_inquilino = ?";
         var row = await pool.query(query, [id]);
-        return row[0];
+        return row;
     } catch (error) {
         console.log(error);
     }
@@ -69,9 +69,9 @@ async function getServicioEdit(id) {
     try {
         let query = "SELECT * FROM servicios WHERE id=?";
         let row = await pool.query(query, [id]);
-        
+
         return row[0];
-        
+
     } catch (error) {
         console.log(error);
     }
@@ -92,23 +92,23 @@ async function UpdateGasto(obj, id) {
         row;
         return true;
     } catch (error) {
-console.log(error)
+        console.log(error)
     }
 }
-async function updateServicio(obj,id){
+async function updateServicio(obj, id) {
     try {
         let actualizar = "update servicios set ? where id=?";
-        var row = await pool.query(actualizar,[obj,id])
+        var row = await pool.query(actualizar, [obj, id])
         row;
         return true;
     } catch (error) {
         console.log(error)
     }
 }
-async function DeleteCompra(id){
+async function DeleteCompra(id) {
     try {
-        let borrar ="delete from gastos where id=?"
-        let row = await pool.query(borrar,id)
+        let borrar = "delete from gastos where id=?"
+        let row = await pool.query(borrar, id)
         row;
         return true
     } catch (error) {
@@ -116,10 +116,10 @@ async function DeleteCompra(id){
         return false
     }
 }
-async function DeleteServicio(id){
+async function DeleteServicio(id) {
     try {
         let borrar = "delete from servicios where id =?";
-        let row = await pool.query(borrar,id);
+        let row = await pool.query(borrar, id);
         row;
         return true
     } catch (error) {
@@ -127,10 +127,10 @@ async function DeleteServicio(id){
         return false
     }
 }
-async function contactoGet(id){
+async function contactoGet(id) {
     try {
         let consulta = "select nombre,apellido,email from inquilino where id = ?";
-        let row = await pool.query(consulta,id);
+        let row = await pool.query(consulta, id);
         return row[0];
     } catch (error) {
         console.log(error);

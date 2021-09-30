@@ -44,7 +44,7 @@ app.get('/', protectedUser, async (req, res) => {
     if (data) {
         var data2 = await usuariosmodel.getIntegrantes(data.id_domicilio);
         var data3 = await usuariosmodel.getDomicilio(data.id_domicilio);
-        var data4 = await usuariosmodel.getGastos(id);
+        var data4 = await usuariosmodel.getGasto(id);
         var data5 = await usuariosmodel.getServicios(data.id_domicilio);
         var thereData4 = true;
         var thereData5 = true;
@@ -64,8 +64,9 @@ app.get('/', protectedUser, async (req, res) => {
             hayservicios: thereData5,
             haygastos: thereData4
         })
-    }else{
-       
+        console.log(data4);
+    } else {
+
     }
 
 })
@@ -186,24 +187,24 @@ app.get('/contacto/:id', protectedUser, async (req, res) => {
 })
 app.post('/contacto', protectedUser, async (req, res) => {
     const mail = {
-        from:'mailer@nodemailer.com',
+        from: 'mailer@nodemailer.com',
         to: req.body.email,
         subject: 'Mensaje de Inquilino',
         html: `Hola, ${req.body.nombre}. Te han enviado un mail de
         la app Gestionar. Este es el mensaje: <br> ${req.body.contenido} .`
     }
     let transporter = nodemailer.createTransport({
-        host:process.env.SMTP_HOST,
-        port:process.env.SMTP_PORT,
-        auth:{
-            user:process.env.SMTP_USER,
-            pass:process.env.STMP_PASS
+        host: process.env.SMTP_HOST,
+        port: process.env.SMTP_PORT,
+        auth: {
+            user: process.env.SMTP_USER,
+            pass: process.env.STMP_PASS
         }
     });
     await transporter.sendMail(mail);
     res.status(201).json({
-        error:false,
-        mensaje:"mensaje enviado"
+        error: false,
+        mensaje: "mensaje enviado"
     });
 })
 
