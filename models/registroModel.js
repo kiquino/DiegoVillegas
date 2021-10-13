@@ -43,17 +43,33 @@ async function newInquilino(nombre, apellido, email, dni, password, calle, altur
         console.log(err);
     }
 }
-async function newCompra(id, categoria, valor) {
+async function newCompra(id, categoria, valor,nombre,detalle) {
     let obj2 = {
-        id_individuo: id,
+       
         categoria: categoria,
-        gasto: valor,
-        fecha:new Date()
+        valor: valor,
+        nombre:nombre,
+        detalle:detalle,
+
+        // 
     }
+    // let obj3 = {
+    //     fecha:new Date(),
+    //     id_inquilino: id
+    // }
+  
     try {
         var query = "insert into gastos set ?";
         var insertCompra = await pool.query(query, [obj2]);
+        
         insertCompra;
+        var query3 = "select id from gastos order by id desc limit 1";
+        let searchLastItem = await pool.query(query3);
+        let compraID = searchLastItem[0];
+        let query2="insert into compra set ?";
+        let insertcompra = await pool.query(query2,{ fecha:new Date(),
+            id_inquilino: id,id_compra:compraID.id})
+            insertcompra;
         return true;
     } catch (error) {
         console.log(error)

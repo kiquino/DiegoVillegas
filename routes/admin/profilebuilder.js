@@ -70,6 +70,23 @@ app.get('/', protectedUser, async (req, res) => {
     }
 
 })
+app.get('/getintegrantes',async(req,res)=>{
+    let id_inquilino = req.headers.id;
+    let data = await usuariosmodel.getProfileinfo(id_inquilino);
+    
+    if(data != undefined){
+        let id_domicilio = data.id_domicilio;
+        let data2 = await usuariosmodel.getIntegrantes(id_domicilio);
+        res.json({
+            result_integrante:data2
+        });
+       
+        
+    }else{
+        
+        console.log("hubo un error")
+    }
+})
 app.post('/agregarServicio', protectedUser, async (req, res) => {
     let id = req.body.id;
     let valor = req.body.gasto;

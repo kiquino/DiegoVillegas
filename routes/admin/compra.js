@@ -14,7 +14,9 @@ const protectedUser = async (req, res, next) => {
 
     if (!token) {
 
-        res.send("falta token");
+        res.json({
+            error:true,
+            mensaje:"falta token"});
 
     } else {
         jwt.verify(token, 'pablitoclavounclavito', (err, decoded) => {
@@ -36,12 +38,14 @@ const protectedUser = async (req, res, next) => {
 
 
 
-app.post('/',protectedUser, async (req, res) => {
+app.post('/', async (req, res) => {
     try {
         let id = req.body.id;
         let categoria = req.body.categoria;
         let valor = req.body.valor;
-        let data = await registroModels.newCompra(id, categoria, valor);
+        let nombre = req.body.nombre;
+        let detalle = req.body.detalle;
+        let data = await registroModels.newCompra(id, categoria, valor,nombre,detalle);
 
         if (data) {
             res.json({
@@ -63,12 +67,12 @@ app.post('/',protectedUser, async (req, res) => {
 app.get('/modificar/:id',protectedUser, async (req, res) => {
     let id = req.params.id;
 
-    let data = await usuariosModels.getGasto(id);
+    let data = await usuariosModels.getGastoData(id);
+    console.log(data)
     if (data != undefined) {
         res.json({
-            gasto: data.gasto,
-            categoria: data.categoria,
-            fecha:data.fecha
+            gasto: data.valor,
+            categoria: data.categoria
         })
     } else {
         res.json({

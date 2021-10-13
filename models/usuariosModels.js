@@ -33,6 +33,7 @@ async function getProfileinfo(id_inquilino) {
     try {
         var query = "select nombre,apellido,email,id_domicilio,admin from inquilino where id = ?";
         var row = await pool.query(query, [id_inquilino]);
+       
         return row[0];
     } catch (error) {
         console.log(error);
@@ -49,9 +50,18 @@ async function getGastos(id_inquilino) {
 }
 async function getGasto(id) {
     try {
-        var query = "select gastos.nombre,gastos.valor,compra.fecha from gastos join compra on id_compra = id where id_inquilino = ?";
+        var query = "select gastos.id,gastos.nombre,gastos.valor,compra.fecha from gastos join compra on id_compra = id where id_inquilino = ?";
         var row = await pool.query(query, [id]);
         return row;
+    } catch (error) {
+        console.log(error);
+    }
+}
+async function getGastoData(id) {
+    try {
+        var query = "select categoria,valor from gastos where id = ?";
+        var row = await pool.query(query, [id]);
+        return row[0];
     } catch (error) {
         console.log(error);
     }
@@ -150,5 +160,6 @@ module.exports = {
     updateServicio,
     DeleteCompra,
     DeleteServicio,
-    contactoGet
+    contactoGet,
+    getGastoData
 };
